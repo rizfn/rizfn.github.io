@@ -4,12 +4,17 @@
     font-family: 'Quicksand', sans-serif;
 }
 
-.althead {
+.topspace {
     padding-top: 20px;
     font-size: xx-large;
 }
 
+.rightalign {
+    color: rgba(169, 255, 234, 0.849);
+    padding-left: 100px;
+}
+
 a {
-    color: rgb(79, 155, 255);
+    color: rgb(81, 156, 255);
     text-decoration: underline;
 }
