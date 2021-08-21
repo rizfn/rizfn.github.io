@@ -9,12 +9,16 @@
     font-size: xx-large;
 }
 
-.rightalign {
-    color: rgba(169, 255, 234, 0.849);
-    padding-left: 100px;
+.pushright {
+    color: rgba(169, 255, 234, 0.7);
+    padding-left: 500px;
 }
 
 a {
     color: rgb(81, 156, 255);
     text-decoration: underline;
+}
+
+.qa h1 {
+    color: rgb(102, 237, 255);
 }
