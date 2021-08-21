@@ -1,8 +1,14 @@
 * {
-    color: navajowhite;
+    background-color: rgb(41, 44, 54);
+    color: rgb(226, 213, 193);
     font-family: 'Quicksand', sans-serif;
 }
 
-body {
-    background-color: rgb(41, 44, 54);
+.big {
+    font-size: larger;
+}
+
+A {
+    color: rgb(0, 0, 255);
+    text-decoration: underline;
 }
