@@ -18,3 +18,25 @@ a {
     color: rgb(81, 156, 255);
     text-decoration: underline;
 }
+
+.round {
+    background-color: rgb(226, 213, 193);
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: pointer; 
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+  

@@ -15,13 +15,36 @@
     </section>
 
     <section>
-      <img class="ollie" src="img/ollie_static.png">
+      <div>
+        <img id="ollie" src="img/ollie_static.png">
+        <button class="round center" id="playbutton" onclick="toggleState()"> &#5107B </button>  
+      </div>
 
       <audio id="amberamour">
         <source src="audio/amberamour.ogg">
       </audio>  
+      
+      <script>
+        function toggleState() {
+          var btn = document.getElementById("playbutton");
+          var aud = document.getElementById("amberamour");
+          var pic = document.getElementsById("ollie");
+          if (btn.value == "&#5107B")
+          {
+            btn.value = "&#5111B";
+            aa.play();
+            pic.src="img/ollie_playing.gif";
+          }
+          else 
+          {
+            btn.value = "&#5107B";
+            aa.pause();
+            pic.src="img/ollie_static.png";
+          }
+        }
+      </script>
 
-      <p> Warning <br> plays audio </p>
+      <p> Warning: plays audio (wip to make it work)</p>
 
 
     </section>
