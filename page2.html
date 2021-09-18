@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <link rel="stylesheet" href="test.css" />
+
     <title>
       Page 2 Baby
     </title> 
+    <link rel="stylesheet" href="test.css" />
   </head>
+
   <body>
 
     <section>
@@ -15,40 +18,31 @@
     </section>
 
     <section>
-      <div>
+      <div class="container">
         <img id="ollie" src="img/ollie_static.png">
-        <button class="round center" id="playbutton" onclick="toggleState()"> &#5107B </button>  
+        <button class="roundbtn center" id="playbutton" onclick="toggleState()"> &#x2BC8 </button>  
       </div>
 
-      <audio id="amberamour">
+      <audio id="amberamour" loop>
         <source src="audio/amberamour.ogg">
       </audio>  
       
-      <script>
-        function toggleState() {
-          var btn = document.getElementById("playbutton");
-          var aud = document.getElementById("amberamour");
-          var pic = document.getElementsById("ollie");
-          if (btn.value == "&#5107B")
-          {
-            btn.value = "&#5111B";
-            aa.play();
-            pic.src="img/ollie_playing.gif";
-          }
-          else 
-          {
-            btn.value = "&#5107B";
-            aa.pause();
-            pic.src="img/ollie_static.png";
-          }
-        }
-      </script>
-
-      <p> Warning: plays audio (wip to make it work)</p>
-
+      <p> Warning: plays audio (wip to make it work) </p>
 
     </section>
 
+    <p class="todo topspace">
+      TO DO:
+      <ul class="todo"> 
+        <li> Make the button visibility less instantaneuos </li>
+        <li> Darken the image (or background) when hovering maybe? </li>
+        <li> Get the unicode in the button working properly - no emojis ( &#x23F8 &#x2BC8 &#9658  &#9616;&#9616; ) </li>
+        <li> Add scrollmagic, maybe to do some animated gifs or just to keep a counter like on journo sites </li>
+      </ul> 
+    </p>
+
+    <script src="test2.js"></script>
 
 </body>
+
 </html>
