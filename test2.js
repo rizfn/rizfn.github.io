@@ -4,15 +4,15 @@ var pic = document.getElementById("ollie")
 
 
 function toggleState() {
-    if (btn.innerText == "\u2BC8")
+    if (btn.innerHTML == '<i class="material-icons">play_arrow</i>')
     {
-      btn.innerText = "\u23F8\uFE0E";
+      btn.innerHTML = '<i class="material-icons">pause</i>';
       aud.play();
       pic.src="img/ollie_playing.gif";
     }
     else 
     {
-      btn.innerText = "\u2BC8";
+      btn.innerHTML = '<i class="material-icons">play_arrow</i>';
       aud.pause();
       pic.src="img/ollie_static.png";
     }
