@@ -57,6 +57,13 @@ a {
     text-decoration: underline;
 }
 
+#scrollprompt {
+    font-size: 500%;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 50%;
+}
+
 .container {
     position: relative;
     border-radius: 50%;

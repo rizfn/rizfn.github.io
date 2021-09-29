@@ -1,10 +1,10 @@
-function toggleState() {
+function toggleState() { // on clicking the play button in olivier's pic
 
   var btn = document.getElementById("playbutton")
   var aud = document.getElementById("amberamour")
   var pic = document.getElementById("ollie")
 
-  if (btn.innerHTML == '<i class="material-icons">play_arrow</i>')
+  if (btn.innerHTML.trim() == '<i class="material-icons">play_arrow</i>')  // trim removes whitespace
   {
     btn.innerHTML = '<i class="material-icons">pause</i>';
     aud.play();
@@ -18,24 +18,25 @@ function toggleState() {
   }
 };
 
-function scroll() {
+
+function scroll() { // used for scrollmagic
   var controller = new ScrollMagic.Controller();
 
   var height = document.getElementById("item3").offsetHeight
 
   var scene = new ScrollMagic.Scene({
-    triggerElement: "#item1",
-    duration: height,
-    triggerHook: 0
+    triggerElement: "#item1", // where to start
+    duration: height, // how long for the scene to last
+    triggerHook: 0  // when trigger passes the top of the screen
   })
-  .setPin("#item2")
+  .setPin("#item2")  // pin this
   .addIndicators({name: "controller"}) // add indicators (requires plugin)
   .addTo(controller);
 };
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  scroll();
+document.addEventListener('DOMContentLoaded', function() { // runs only when the page is loaded
+  scroll();    
 }, false);
 
 
