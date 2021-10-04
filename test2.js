@@ -18,25 +18,24 @@ function toggleState() { // on clicking the play button in olivier's pic
   }
 };
 
-
 function scroll() { // used for scrollmagic
   var controller = new ScrollMagic.Controller();
 
-  var height = document.getElementById("item3").offsetHeight
+  var height = document.getElementById("crossbellbg").offsetHeight + document.getElementById("liberlbg").offsetHeight + document.getElementById("scrollprompt").offsetHeight
 
   var scene = new ScrollMagic.Scene({
-    triggerElement: "#item1", // where to start
+    triggerElement: "#headerelement", // where to start
     duration: height, // how long for the scene to last
     triggerHook: 0  // when trigger passes the top of the screen
   })
-  .setPin("#item2")  // pin this
+  .setPin("#pinmusicelement")  // pin this
   .addIndicators({name: "controller"}) // add indicators (requires plugin)
   .addTo(controller);
 };
 
 
 document.addEventListener('DOMContentLoaded', function() { // runs only when the page is loaded
-  scroll();    
+  scroll();
 }, false);
 
 

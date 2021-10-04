@@ -19,36 +19,42 @@
 
     <div class="grid-container">
 
-      <div id="item1">
+      <div id="headerelement">
         <h1>You've reached page 2</h1>
 
         <p> Nothing seems to work here :( </p>  
       </div>
 
-      <div id="item2">
-        <div class="container">
-          <img id="ollie" src="img/ollie_static.png">
-          <button class="roundbtn center" id="playbutton" onclick="toggleState()"> 
-            <i class="material-icons">play_arrow</i>
-          </button>  
+      <div id="musicelement">
+        <div id="pinmusicelement">
+          <div class="container">
+            <img id="ollie" src="img/ollie_static.png">
+            <button class="roundbtn center" id="playbutton" onclick="toggleState()"> 
+              <i class="material-icons">play_arrow</i>
+            </button>  
+          </div>
+
+          <audio id="amberamour" loop>
+            <source src="audio/amberamour.ogg">
+          </audio>  
+          
+          <p> Warning: plays audio (no volume control) </p>
         </div>
-
-        <audio id="amberamour" loop>
-          <source src="audio/amberamour.ogg">
-        </audio>  
-        
-        <p> Warning: plays audio (no volume control) </p>
-
       </div>
 
 
-      <div id="item3">
+      <div id="scrollprompt">
+        Scroll!
+      </div>
 
-        <p id="scrollprompt"> Scroll! </p>
+      <div class="background" id="liberlbg">
+      </div>
 
-        <img id="estelle" src="img/placeholder.gif">
-        <img id="josh" src="img/placeholder.gif">
-
+      <div id="liberl">
+        <div class="spriteholder">
+          <img id="estelle" src="img/placeholder.png">
+          <img id="josh" src="img/placeholder.png">
+        </div>
         <br> <br>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit fringilla cursus. In tincidunt nisl sem, eu consectetur neque mollis vitae. Donec venenatis odio mauris, in pharetra diam tincidunt vel. Nulla sollicitudin mattis magna sit amet pulvinar. Donec bibendum nibh sit amet arcu vehicula, at malesuada eros viverra. Cras elit lorem, scelerisque non nisl at, luctus tempus quam. Sed bibendum enim et neque mattis, vitae rutrum nisi mattis.
         <br> <br>
@@ -58,7 +64,17 @@
         <br> <br>
         Curabitur aliquet, felis eu condimentum semper, urna lacus tristique turpis, ut mattis turpis orci et lacus. Fusce blandit a risus ac varius. Etiam ut lacus consectetur, cursus mi id, volutpat purus. Nulla ultricies a turpis ac ultrices. Integer congue in arcu nec facilisis. Cras ut mauris diam. Pellentesque pulvinar, felis ut gravida malesuada, mauris arcu auctor ipsum, vel suscipit mi turpis ac erat. Suspendisse potenti. Suspendisse potenti. Donec placerat sem et enim venenatis, vitae sagittis nulla aliquet. Sed cursus, dui aliquet fermentum sodales, lacus erat imperdiet purus, ut vehicula sem nunc ut eros.
         <br> <br>
-        Suspendisse dictum pretium nisi, id dictum sapien elementum sed. Nunc interdum tortor vitae nisl volutpat, pretium volutpat ipsum tempor. Duis massa lacus, luctus eu dignissim sed, tempor eu eros. Nam massa mauris, egestas non metus vulputate, viverra faucibus nisl. Sed maximus tincidunt lectus. Cras rhoncus dignissim augue eu auctor. Aenean nec scelerisque sapien, a dictum leo. In aliquet blandit erat, sed congue arcu interdum et. Interdum et malesuada fames ac ante ipsum primis in faucibus. In sodales efficitur sem, sed semper nulla suscipit dictum. Ut elit velit, posuere eget pharetra vel, luctus vel velit. Praesent tellus tellus, aliquet a luctus eu, laoreet vitae arcu. Suspendisse tempor libero a neque auctor, eu interdum libero vehicula.
+        Suspendisse dictum pretium nisi, id dictum sapien elementum sed. Nunc interdum tortor vitae nisl volutpat, pretium volutpat ipsum tempor. Duis massa lacus, luctus eu dignissim sed, tempor eu eros. Nam massa mauris, egestas non metus vulputate, viverra faucibus nisl. Sed maximus tincidunt lectus. Cras rhoncus dignissim augue eu auctor. Aenean nec scelerisque sapien, a dictum leo. In aliquet blandit erat, sed congue arcu interdum et. Interdum et malesuada fames ac ante ipsum primis in faucibus. In sodales efficitur sem, sed semper nulla suscipit dictum. Ut elit velit, posuere eget pharetra vel, luctus vel velit. Praesent tellus tellus, aliquet a luctus eu, laoreet vitae arcu. Suspendisse tempor libero a neque auctor, eu interdum libero vehicula.  
+      </div>
+
+      <div class="background" id="crossbellbg">
+      </div>
+
+      <div id="crossbell">
+        <div class="spriteholder">
+          <img id="lloyd" src="img/placeholder.png">
+          <img id="randy" src="img/placeholder.png">
+        </div>
         <br> <br>
         Curabitur erat magna, pellentesque non sodales in, fringilla viverra enim. Fusce aliquam id elit id vehicula. Sed gravida, diam id blandit mollis, tortor ex blandit libero, porta posuere odio diam nec nisi. Curabitur feugiat augue ut ex auctor volutpat. Vivamus et tellus ac leo congue accumsan accumsan id erat. Nam condimentum sem at faucibus tempor. Maecenas diam metus, tempor sit amet turpis in, egestas pharetra magna. Nunc sit amet dictum magna, a volutpat lorem.
         <br> <br>
@@ -68,18 +84,18 @@
         <br> <br>
         Sed quis pharetra eros, non pretium eros. Ut eros mauris, dictum ut sapien at, consectetur tincidunt orci. Phasellus faucibus auctor quam mattis elementum. Etiam cursus eu quam quis luctus. Vivamus luctus diam ut metus pellentesque finibus. Etiam convallis ac purus et vulputate. Pellentesque et diam venenatis, dictum massa in, gravida urna.
         <br> <br>
-        Nullam lacinia nulla tortor, quis lacinia sapien efficitur ac. Aenean in libero nulla. Aliquam accumsan molestie turpis in luctus. Suspendisse in elit pretium, consectetur felis non, tempor diam. Aenean tempor massa nec vehicula faucibus. Duis vitae mattis ligula, aliquam eleifend nulla. Curabitur ut dolor vel sem consequat rutrum mattis imperdiet tellus. In interdum, erat eu ultrices suscipit, erat magna euismod orci, vitae rutrum sem enim sit amet purus. Mauris commodo urna at sodales tincidunt.
+        Nullam lacinia nulla tortor, quis lacinia sapien efficitur ac. Aenean in libero nulla. Aliquam accumsan molestie turpis in luctus. Suspendisse in elit pretium, consectetur felis non, tempor diam. Aenean tempor massa nec vehicula faucibus. Duis vitae mattis ligula, aliquam eleifend nulla. Curabitur ut dolor vel sem consequat rutrum mattis imperdiet tellus. In interdum, erat eu ultrices suscipit, erat magna euismod orci, vitae rutrum sem enim sit amet purus. Mauris commodo urna at sodales tincidunt.  
       </div>
 
       <div id="item4" class="todo">
         <p>
           TO DO:
           <ul> 
-            <li> Darken the image (or background) when hovering maybe? </li>
+            <li> Darken the ollie's background when hovering maybe? </li>
             <li> Add a volume slider </li>
             <li> Fine tune the scrollmagic (then remove indicators & import CDNjs) </li>
-            <li> Replace lipsum with some gifs of EJ & Lloyd animated w/ scroll, and some text </li>
-            <li> Add in backgrounds with parallax scrolling (liberl + xbell) </li>
+            <li> Replace lipsum with content and placeholders with some gifs of E&J & Lloyd animated w/ scroll </li>
+            <li> make bgs full page w/ overlapping grid, and then parallax scroll it </li>
           </ul> 
         </p>
       </div>
