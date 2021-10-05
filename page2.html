@@ -11,6 +11,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.min.js" integrity="sha512-RvUydNGlqYJapy0t4AH8hDv/It+zKsv4wOQGb+iOnEfa6NnF2fzjXgRy+FDjSpMfC3sjokNUzsfYZaZ8QAwIxg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js" integrity="sha512-5/OHwmQzDSBS0Ous4/hlYoWLHd06/d2r7LdKZQVBXOA6PvOqWVXtdboiLTU7lQTGyVoKVTNkwi0ol4gHGlw5ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js" integrity="sha512-eP6ippJojIKXKO8EPLtsUMS+/sAGHGo1UN/38swqZa1ypfcD4I0V/ac5G3VzaHfDaklFmQLEs51lhkkVaqg60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="test2.js"></script>
 
   </head>
@@ -19,14 +21,14 @@
 
     <div class="grid-container">
 
-      <div id="headerelement">
+      <div class="margin" id="headerelement">
         <h1>You've reached page 2</h1>
 
         <p> Nothing seems to work here :( </p>  
       </div>
 
-      <div id="musicelement">
-        <div id="pinmusicelement">
+      <div class="margin" id="musicelement">
+        <div class="margin" id="pinmusicelement">
           <div class="container">
             <img id="ollie" src="img/ollie_static.png">
             <button class="roundbtn center" id="playbutton" onclick="toggleState()"> 
@@ -43,51 +45,55 @@
       </div>
 
 
-      <div id="scrollprompt">
+      <div class="margin" id="scrollprompt">
         Scroll!
       </div>
 
       <div class="background" id="liberlbg">
       </div>
 
-      <div id="liberl">
+      <div class="margin" id="liberl">
         <div class="spriteholder">
           <img id="estelle" src="img/placeholder.png">
           <img id="josh" src="img/placeholder.png">
         </div>
-        <br> <br>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit fringilla cursus. In tincidunt nisl sem, eu consectetur neque mollis vitae. Donec venenatis odio mauris, in pharetra diam tincidunt vel. Nulla sollicitudin mattis magna sit amet pulvinar. Donec bibendum nibh sit amet arcu vehicula, at malesuada eros viverra. Cras elit lorem, scelerisque non nisl at, luctus tempus quam. Sed bibendum enim et neque mattis, vitae rutrum nisi mattis.
-        <br> <br>
-        In ut justo sem. Sed sagittis nibh eu accumsan placerat. Integer malesuada ullamcorper tellus. Cras faucibus metus id ipsum maximus porta. Vestibulum non maximus neque. Duis sed nunc id magna dapibus tincidunt eget at ipsum. Phasellus eleifend rhoncus mi ut efficitur. Maecenas quam orci, vestibulum a ante vel, suscipit consectetur enim. Integer consequat, urna in varius ultrices, neque sapien rutrum sapien, ut lobortis massa eros ut est. Sed eu lorem ipsum. Sed ac porta ligula, et facilisis tellus. Mauris mauris diam, maximus sit amet tortor a, pulvinar finibus eros.
-        <br> <br>
-        Curabitur gravida tincidunt nisi mollis tincidunt. Morbi sit amet ultricies erat. In efficitur placerat vulputate. Quisque auctor metus ut augue venenatis, in iaculis sem rhoncus. Nunc dictum odio turpis, vel luctus est pharetra sed. Sed malesuada nisl sit amet viverra maximus. Sed ut placerat est, nec dapibus nisl. Suspendisse tempor mattis vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus vitae mauris lorem. Suspendisse potenti.
-        <br> <br>
-        Curabitur aliquet, felis eu condimentum semper, urna lacus tristique turpis, ut mattis turpis orci et lacus. Fusce blandit a risus ac varius. Etiam ut lacus consectetur, cursus mi id, volutpat purus. Nulla ultricies a turpis ac ultrices. Integer congue in arcu nec facilisis. Cras ut mauris diam. Pellentesque pulvinar, felis ut gravida malesuada, mauris arcu auctor ipsum, vel suscipit mi turpis ac erat. Suspendisse potenti. Suspendisse potenti. Donec placerat sem et enim venenatis, vitae sagittis nulla aliquet. Sed cursus, dui aliquet fermentum sodales, lacus erat imperdiet purus, ut vehicula sem nunc ut eros.
-        <br> <br>
-        Suspendisse dictum pretium nisi, id dictum sapien elementum sed. Nunc interdum tortor vitae nisl volutpat, pretium volutpat ipsum tempor. Duis massa lacus, luctus eu dignissim sed, tempor eu eros. Nam massa mauris, egestas non metus vulputate, viverra faucibus nisl. Sed maximus tincidunt lectus. Cras rhoncus dignissim augue eu auctor. Aenean nec scelerisque sapien, a dictum leo. In aliquet blandit erat, sed congue arcu interdum et. Interdum et malesuada fames ac ante ipsum primis in faucibus. In sodales efficitur sem, sed semper nulla suscipit dictum. Ut elit velit, posuere eget pharetra vel, luctus vel velit. Praesent tellus tellus, aliquet a luctus eu, laoreet vitae arcu. Suspendisse tempor libero a neque auctor, eu interdum libero vehicula.  
+        <div>
+          <br> <br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit fringilla cursus. In tincidunt nisl sem, eu consectetur neque mollis vitae. Donec venenatis odio mauris, in pharetra diam tincidunt vel. Nulla sollicitudin mattis magna sit amet pulvinar. Donec bibendum nibh sit amet arcu vehicula, at malesuada eros viverra. Cras elit lorem, scelerisque non nisl at, luctus tempus quam. Sed bibendum enim et neque mattis, vitae rutrum nisi mattis.
+          <br> <br>
+          In ut justo sem. Sed sagittis nibh eu accumsan placerat. Integer malesuada ullamcorper tellus. Cras faucibus metus id ipsum maximus porta. Vestibulum non maximus neque. Duis sed nunc id magna dapibus tincidunt eget at ipsum. Phasellus eleifend rhoncus mi ut efficitur. Maecenas quam orci, vestibulum a ante vel, suscipit consectetur enim. Integer consequat, urna in varius ultrices, neque sapien rutrum sapien, ut lobortis massa eros ut est. Sed eu lorem ipsum. Sed ac porta ligula, et facilisis tellus. Mauris mauris diam, maximus sit amet tortor a, pulvinar finibus eros.
+          <br> <br>
+          Curabitur gravida tincidunt nisi mollis tincidunt. Morbi sit amet ultricies erat. In efficitur placerat vulputate. Quisque auctor metus ut augue venenatis, in iaculis sem rhoncus. Nunc dictum odio turpis, vel luctus est pharetra sed. Sed malesuada nisl sit amet viverra maximus. Sed ut placerat est, nec dapibus nisl. Suspendisse tempor mattis vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus vitae mauris lorem. Suspendisse potenti.
+          <br> <br>
+          Curabitur aliquet, felis eu condimentum semper, urna lacus tristique turpis, ut mattis turpis orci et lacus. Fusce blandit a risus ac varius. Etiam ut lacus consectetur, cursus mi id, volutpat purus. Nulla ultricies a turpis ac ultrices. Integer congue in arcu nec facilisis. Cras ut mauris diam. Pellentesque pulvinar, felis ut gravida malesuada, mauris arcu auctor ipsum, vel suscipit mi turpis ac erat. Suspendisse potenti. Suspendisse potenti. Donec placerat sem et enim venenatis, vitae sagittis nulla aliquet. Sed cursus, dui aliquet fermentum sodales, lacus erat imperdiet purus, ut vehicula sem nunc ut eros.
+          <br> <br>
+          Suspendisse dictum pretium nisi, id dictum sapien elementum sed. Nunc interdum tortor vitae nisl volutpat, pretium volutpat ipsum tempor. Duis massa lacus, luctus eu dignissim sed, tempor eu eros. Nam massa mauris, egestas non metus vulputate, viverra faucibus nisl. Sed maximus tincidunt lectus. Cras rhoncus dignissim augue eu auctor. Aenean nec scelerisque sapien, a dictum leo. In aliquet blandit erat, sed congue arcu interdum et. Interdum et malesuada fames ac ante ipsum primis in faucibus. In sodales efficitur sem, sed semper nulla suscipit dictum. Ut elit velit, posuere eget pharetra vel, luctus vel velit. Praesent tellus tellus, aliquet a luctus eu, laoreet vitae arcu. Suspendisse tempor libero a neque auctor, eu interdum libero vehicula.  
+        </div>
       </div>
 
       <div class="background" id="crossbellbg">
       </div>
 
-      <div id="crossbell">
+      <div class="margin" id="crossbell">
         <div class="spriteholder">
           <img id="lloyd" src="img/placeholder.png">
           <img id="randy" src="img/placeholder.png">
         </div>
-        <br> <br>
-        Curabitur erat magna, pellentesque non sodales in, fringilla viverra enim. Fusce aliquam id elit id vehicula. Sed gravida, diam id blandit mollis, tortor ex blandit libero, porta posuere odio diam nec nisi. Curabitur feugiat augue ut ex auctor volutpat. Vivamus et tellus ac leo congue accumsan accumsan id erat. Nam condimentum sem at faucibus tempor. Maecenas diam metus, tempor sit amet turpis in, egestas pharetra magna. Nunc sit amet dictum magna, a volutpat lorem.
-        <br> <br>
-        Ut a ligula tortor. Aliquam vitae elit nec augue euismod mattis. Integer a nisl velit. Etiam ut nulla nisi. Aliquam magna elit, ullamcorper ac aliquam sed, condimentum ut justo. Sed in lorem ut tortor rutrum tincidunt id et orci. Suspendisse imperdiet volutpat dolor, sit amet vestibulum turpis interdum mollis. Suspendisse condimentum est sed nisl placerat, quis accumsan purus venenatis. Morbi convallis orci a tempor aliquam. Donec erat neque, eleifend vitae placerat a, tincidunt vel quam. Donec molestie tortor leo, id aliquet dolor porta nec. Quisque in massa suscipit, sollicitudin purus vel, accumsan ligula. Sed nisi erat, varius et scelerisque sed, vehicula id tortor.
-        <br> <br>
-        Nunc fermentum in diam sit amet posuere. Mauris eget condimentum elit. Etiam auctor, ex eu consequat faucibus, urna risus interdum orci, in maximus ligula lacus quis nisl. Donec sit amet mattis justo. Maecenas ultrices pretium felis a rhoncus. Quisque auctor est nec odio vulputate, ut fringilla enim iaculis. Phasellus rhoncus mauris luctus, porta enim et, interdum ante. Vestibulum elit urna, blandit a tempor non, scelerisque vel ipsum. Sed ullamcorper nisi quis justo tincidunt, et tempus ligula aliquam. Suspendisse egestas sollicitudin suscipit. Quisque eu tempus eros. Integer hendrerit justo orci, sit amet euismod turpis ultricies nec.
-        <br> <br>
-        Sed quis pharetra eros, non pretium eros. Ut eros mauris, dictum ut sapien at, consectetur tincidunt orci. Phasellus faucibus auctor quam mattis elementum. Etiam cursus eu quam quis luctus. Vivamus luctus diam ut metus pellentesque finibus. Etiam convallis ac purus et vulputate. Pellentesque et diam venenatis, dictum massa in, gravida urna.
-        <br> <br>
-        Nullam lacinia nulla tortor, quis lacinia sapien efficitur ac. Aenean in libero nulla. Aliquam accumsan molestie turpis in luctus. Suspendisse in elit pretium, consectetur felis non, tempor diam. Aenean tempor massa nec vehicula faucibus. Duis vitae mattis ligula, aliquam eleifend nulla. Curabitur ut dolor vel sem consequat rutrum mattis imperdiet tellus. In interdum, erat eu ultrices suscipit, erat magna euismod orci, vitae rutrum sem enim sit amet purus. Mauris commodo urna at sodales tincidunt.  
+        <p>
+          <br> <br>
+          Curabitur erat magna, pellentesque non sodales in, fringilla viverra enim. Fusce aliquam id elit id vehicula. Sed gravida, diam id blandit mollis, tortor ex blandit libero, porta posuere odio diam nec nisi. Curabitur feugiat augue ut ex auctor volutpat. Vivamus et tellus ac leo congue accumsan accumsan id erat. Nam condimentum sem at faucibus tempor. Maecenas diam metus, tempor sit amet turpis in, egestas pharetra magna. Nunc sit amet dictum magna, a volutpat lorem.
+          <br> <br>
+          Ut a ligula tortor. Aliquam vitae elit nec augue euismod mattis. Integer a nisl velit. Etiam ut nulla nisi. Aliquam magna elit, ullamcorper ac aliquam sed, condimentum ut justo. Sed in lorem ut tortor rutrum tincidunt id et orci. Suspendisse imperdiet volutpat dolor, sit amet vestibulum turpis interdum mollis. Suspendisse condimentum est sed nisl placerat, quis accumsan purus venenatis. Morbi convallis orci a tempor aliquam. Donec erat neque, eleifend vitae placerat a, tincidunt vel quam. Donec molestie tortor leo, id aliquet dolor porta nec. Quisque in massa suscipit, sollicitudin purus vel, accumsan ligula. Sed nisi erat, varius et scelerisque sed, vehicula id tortor.
+          <br> <br>
+          Nunc fermentum in diam sit amet posuere. Mauris eget condimentum elit. Etiam auctor, ex eu consequat faucibus, urna risus interdum orci, in maximus ligula lacus quis nisl. Donec sit amet mattis justo. Maecenas ultrices pretium felis a rhoncus. Quisque auctor est nec odio vulputate, ut fringilla enim iaculis. Phasellus rhoncus mauris luctus, porta enim et, interdum ante. Vestibulum elit urna, blandit a tempor non, scelerisque vel ipsum. Sed ullamcorper nisi quis justo tincidunt, et tempus ligula aliquam. Suspendisse egestas sollicitudin suscipit. Quisque eu tempus eros. Integer hendrerit justo orci, sit amet euismod turpis ultricies nec.
+          <br> <br>
+          Sed quis pharetra eros, non pretium eros. Ut eros mauris, dictum ut sapien at, consectetur tincidunt orci. Phasellus faucibus auctor quam mattis elementum. Etiam cursus eu quam quis luctus. Vivamus luctus diam ut metus pellentesque finibus. Etiam convallis ac purus et vulputate. Pellentesque et diam venenatis, dictum massa in, gravida urna.
+          <br> <br>
+          Nullam lacinia nulla tortor, quis lacinia sapien efficitur ac. Aenean in libero nulla. Aliquam accumsan molestie turpis in luctus. Suspendisse in elit pretium, consectetur felis non, tempor diam. Aenean tempor massa nec vehicula faucibus. Duis vitae mattis ligula, aliquam eleifend nulla. Curabitur ut dolor vel sem consequat rutrum mattis imperdiet tellus. In interdum, erat eu ultrices suscipit, erat magna euismod orci, vitae rutrum sem enim sit amet purus. Mauris commodo urna at sodales tincidunt.  
+        </p>
       </div>
-
-      <div id="item4" class="todo">
+      
+      <div class="todo margin" id="item4">
         <p>
           TO DO:
           <ul> 
@@ -95,12 +101,12 @@
             <li> Add a volume slider </li>
             <li> Fine tune the scrollmagic (then remove indicators & import CDNjs) </li>
             <li> Replace lipsum with content and placeholders with some gifs of E&J & Lloyd animated w/ scroll </li>
-            <li> make bgs full page w/ overlapping grid, and then parallax scroll it </li>
+            <li> Try to stop the jerkiness at the end of the pin </li>
           </ul> 
         </p>
       </div>
 
-      <div id="footeritem">
+      <div class="margin" id="footeritem">
         <footer>
           Audio and Sprites &copy; Nihon Falcom
         </footer>  
