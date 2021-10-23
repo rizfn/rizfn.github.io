@@ -1,3 +1,5 @@
+gsap.registerPlugin(ScrollTrigger);
+
 function toggleState() { // on clicking the play button in olivier's pic
 
   var btn = document.getElementById("playbutton")
@@ -19,51 +21,45 @@ function toggleState() { // on clicking the play button in olivier's pic
 
 };
 
-function scroll() { // used for scrollmagic
-
-  var controller = new ScrollMagic.Controller();
+function scroll() { // for ScrollTrigger animations
 
   var liberlheight = document.getElementById("liberlbg").offsetHeight
   var crossbellheight = document.getElementById("crossbellbg").offsetHeight
   var pinheight = document.getElementById("scrollprompt").offsetHeight + liberlheight + crossbellheight
 
-  // pinning scene
-  new ScrollMagic.Scene({
-    triggerElement: "#headerelement", // where to start
-    duration: pinheight, // how long for the scene to last
-    triggerHook: 0  // when trigger passes the top of the screen
-  })
-  .setPin("#pinmusicelement")  // pin this
-  .addIndicators({name: "ollie pin"}) // add indicators (requires plugin)
-  .addTo(controller);
+  // pinning olivier
+  ScrollTrigger.create({
+    trigger: "#pinmusicelement",
+    start: "center center", // middle of the element is at middle of viewport
+    end: "+="+pinheight,
+    pin: "#pinmusicelement"
+  });
 
-  // defining parallax animations
-  parallaxliberl = gsap.to("#liberlbg", {y: 200, ease: Linear.easeNone});
-  parallaxcrossbell = gsap.to("#crossbellbg", {y: 200, ease: Linear.easeNone});
+  // parallax liberl bg
+  gsap.to("#liberlbg", { // defining the GSAP animation
+    y: 200, // just lower the height
+    scrollTrigger: {
+      trigger: "#liberlbg",  // element that causes the animation to play
+      start: "top top",  // top of trigger element hits the top of viewport
+      end: "bottom top", // bottom of trigger element at the top of viewport
+      scrub: true,  // animates on scroll (otherwise animation happens instantly after scrolling point is met)
+      markers: true,  // help debugging
+      id: "liberl"  // labels markers
+    }});
 
-  // parallax scene: liberl
-  new ScrollMagic.Scene({
-    triggerElement: "#liberlbg",
-    duration: liberlheight,
-    triggerHook: 0
-  })
-  .setTween(parallaxliberl)
-  .addIndicators({name: "liberl parallax"})
-  .addTo(controller);
-
-  // parallax scene: crossbell
-  new ScrollMagic.Scene({
-    triggerElement: "#crossbellbg",
-    duration: crossbellheight,
-    triggerHook: 0
-  })
-  .setTween(parallaxcrossbell)
-  .addIndicators({name: "crossbell parallax"})
-  .addTo(controller);
-  
+  // parallax crossbell bg
+  gsap.to("#crossbellbg", {
+    y: 200, 
+    scrollTrigger: {
+      trigger: "#crossbellbg",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+      markers: true,
+      id: "crossbell"
+    }});
 
 };
-
 
 document.addEventListener('DOMContentLoaded', function() { // runs only when the page is loaded
   scroll();
