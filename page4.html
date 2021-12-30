@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="page4.css" />
+    <link rel="stylesheet" href="test.css" />
+
+    <title>
+      Page 4: d3
+    </title> 
+
+  </head>
+
+  <body>
+
+    <section>
+
+      <h1> d3 bar charts below: </h1>
+
+      <form action="">
+        <input type="radio" name="wave-filter" value="wave 1" onclick="updateData()" checked>
+        <label for="wave1"> Wave 1 </label> <br>
+        <input type="radio" name="wave-filter" value="wave 2" onclick="updateData()">
+        <label for="wave2"> Wave 2 </label> <br>
+        <input type="radio" name="wave-filter" value="wave 3" onclick="updateData()">
+        <label for="wave3"> Wave 3 </label> <br>
+      </form>
+
+    </section>
+
+    <section>
+      <div id="chart1">
+        <svg id="bar-chart" width="960" height="300"></svg>
+      </div>
+      <div id="chart2">
+        <svg id="bar-chart-2" width="960" height="300"></svg>
+      </div>
+  
+
+      <script src="page4.js"></script>
+      
+    </section>
+
+  </body>
+
+</html>

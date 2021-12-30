@@ -1,0 +1,26 @@
+.bar {
+  fill:rgb(60, 223, 223);
+}
+
+#bar-chart-2 .bar {
+  fill: deeppink;
+}
+#bar-chart-2 .bar:hover {
+  fill: rgb(206, 243, 42);
+}
+
+.bar:hover {
+  fill: rgb(206, 243, 42);
+}
+
+
+
+.axis line{
+  stroke: rgb(226, 213, 193);
+}
+.axis path{
+  stroke: rgb(226, 213, 193);
+}
+.axis text{
+  fill: rgb(226, 213, 193);
+}
