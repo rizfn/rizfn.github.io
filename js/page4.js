@@ -1,5 +1,11 @@
-var svg = d3.select("svg#bar-chart"),
-margin = {top: 20, right: 20, bottom: 30, left: 40},
+var svg = d3.select("div#chart1")
+    .append("svg")
+    .attr("id", "bar-chart")
+    .attr("width", "960")
+    .attr("height", "300");
+
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
 width = +svg.attr("width") - margin.left - margin.right,
 height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -34,6 +40,31 @@ d3.csv("data/group_reasons.csv", function(d) {
         x.domain(filtered_data.map(function(d) { return d.reason; }));
         y.domain([0, d3.max(filtered_data, function(d) { return d.prop; })]);
 
+        var Tooltip = d3.select("div#chart1")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+
+        var mouseover = function(d) {
+            Tooltip
+                .style("opacity", 1)
+            d3.select(this)
+                .style("fill", "rgb(206, 243, 42)")
+        }
+        var mousemove = function(d) {
+            Tooltip
+                .html(d.wave + ", " + d.reason + "<br>" + d3.format(".2%")(d.prop))
+                .style("left", (d3.mouse(this)[0]+60) + "px")
+                .style("top", (d3.mouse(this)[1]+80) + "px")
+        }
+        var mouseleave = function(d) {
+            Tooltip
+                .style("opacity", 0)
+            d3.select(this)
+                .style("fill", "rgb(60, 223, 223)")
+        }
+
+
 
         g.append("g")
             .attr("class", "axis axis--x")
@@ -57,13 +88,20 @@ d3.csv("data/group_reasons.csv", function(d) {
             .attr("x", function(d) { return x(d.reason); })
             .attr("y", function(d) { return y(d.prop); })
             .attr("width", x.bandwidth())
-            .attr("height", function(d) { return height - y(d.prop); });
+            .attr("height", function(d) { return height - y(d.prop); })
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave);
     });
 
 
 // SECOND BAR CHART
 
-var svg2 = d3.select("svg#bar-chart-2");
+var svg2 = d3.select("div#chart2")
+    .append("svg")
+    .attr("id", "bar-chart-2")
+    .attr("width", "960")
+    .attr("height", "300");
 
 var x2 = d3.scaleBand().rangeRound([0, width]).padding(0.1),
 y2 = d3.scaleLinear().rangeRound([height, 0]);
@@ -89,6 +127,30 @@ d3.csv("data/group_reasons.csv", function(d) {
 
         x2.domain(filtered_data.map(function(d) { return d.reason; }));
 
+
+        var Tooltip = d3.select("div#chart2")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        var mouseover = function(d) {
+            Tooltip
+                .style("opacity", 1)
+            d3.select(this)
+                .style("fill", "rgb(206, 243, 42)")
+        }
+        var mousemove2 = function(d) {
+            Tooltip
+                .html(d.wave + ", " + d.reason + "<br>" + d.counts)
+                .style("left", (d3.mouse(this)[0]+60) + "px")
+                .style("top", (d3.mouse(this)[1]+380) + "px")
+        }
+        var mouseleave = function(d) {
+            Tooltip
+                .style("opacity", 0)
+            d3.select(this)
+                .style("fill", "deeppink")
+        }
+
         g2.append("g")
             .attr("class", "axis axis--x")
             .attr("transform", "translate(0," + height + ")")
@@ -111,7 +173,11 @@ d3.csv("data/group_reasons.csv", function(d) {
             .attr("x", function(d) { return x2(d.reason); })
             .attr("y", function(d) { return y2(d.counts); })
             .attr("width", x2.bandwidth())
-            .attr("height", function(d) { return height - y2(d.counts); });
+            .attr("height", function(d) { return height - y2(d.counts); })
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove2)
+            .on("mouseleave", mouseleave);
+
     });
 
 // UPDATE FUNCTION
