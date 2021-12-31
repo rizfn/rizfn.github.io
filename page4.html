@@ -18,19 +18,19 @@
 
     <section>
 
-      <h1> d3 bar charts below: </h1>
+      <h1> d3 bar charts below (use keypresses to toggle): </h1>
 
       <form id="wave-selector" action="">
-        <div>
-          <input type="radio" name="wave-filter" value="wave 1" onclick="updateData()" checked>
+        <div class="radio-container" onclick="toggleRadio(1)">
+          <input type="radio" id="radio1" name="wave-filter" value="wave 1" checked>
           <label for="wave1"> Wave 1 </label>  
         </div>
-        <div>
-          <input type="radio" name="wave-filter" value="wave 2" onclick="updateData()">
+        <div class="radio-container" onclick="toggleRadio(2)">
+          <input type="radio" id="radio2" name="wave-filter" value="wave 2">
           <label for="wave2"> Wave 2 </label>
         </div>
-        <div>
-          <input type="radio" name="wave-filter" value="wave 3" onclick="updateData()">
+        <div class="radio-container" onclick="toggleRadio(3)">
+          <input type="radio" id="radio3" name="wave-filter" value="wave 3">
           <label for="wave3"> Wave 3 </label>  
         </div>
       </form>
@@ -46,11 +46,11 @@
       
     </section>
 
-    <section class="todo" style="padding-top: 40px;">
+    <section class="todo" style="padding: 40px;">
       TO DO:
       <ul>
-        <li>Make the buttons slightly change color when hovered over</li>
-        <li>Allow the buttons to be clicked when clicking the text (change cursor to pointer too)</li>
+        <li>Take a closer look at the color change on radio hover?</li>
+        <li>Add a shadow to a selected element instead of changing color?</li>
       </ul>
     </section>
 

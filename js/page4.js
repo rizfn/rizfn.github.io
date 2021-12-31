@@ -1,3 +1,14 @@
+function toggleRadio(i) {
+    document.getElementById("radio"+i).checked = true;
+    updateData()
+}
+
+document.addEventListener("keydown", function(e) {
+    if (e.key == 1 || 2 || 3) {
+        toggleRadio(e.key)
+    }
+})
+
 var svg = d3.select("div#chart1")
     .append("svg")
     .attr("id", "bar-chart")
@@ -55,7 +66,7 @@ d3.csv("data/group_reasons.csv", function(d) {
             Tooltip
                 .html(d.wave + ", " + d.reason + "<br>" + d3.format(".2%")(d.prop))
                 .style("left", (d3.mouse(this)[0]+60) + "px")
-                .style("top", (d3.mouse(this)[1]+80) + "px")
+                .style("top", (d3.mouse(this)[1]+40) + "px")
         }
         var mouseleave = function(d) {
             Tooltip
@@ -142,7 +153,7 @@ d3.csv("data/group_reasons.csv", function(d) {
             Tooltip
                 .html(d.wave + ", " + d.reason + "<br>" + d.counts)
                 .style("left", (d3.mouse(this)[0]+60) + "px")
-                .style("top", (d3.mouse(this)[1]+380) + "px")
+                .style("top", (d3.mouse(this)[1]+345) + "px")
         }
         var mouseleave = function(d) {
             Tooltip
