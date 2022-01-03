@@ -61,3 +61,21 @@ div.radio-container {
 div.radio-container:hover {
   color:blanchedalmond;
 }
+
+
+/* Page 3 exclusive stuff */
+
+.heatmap-axis {
+  font-size: 15px;
+}
+
+.cell {
+  stroke-width: 4;
+  stroke: none;
+}
+
+form#numdur-selector {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}

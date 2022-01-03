@@ -4,7 +4,7 @@ function toggleRadio(i) {
 }
 
 document.addEventListener("keydown", function(e) {
-    if (e.key == 1 || 2 || 3) {
+    if (e.key == 1 || e.key == 2 || e.key == 3) {
         toggleRadio(e.key)
     }
 })
