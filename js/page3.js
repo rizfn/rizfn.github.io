@@ -3,7 +3,7 @@ var margin = {top: 40, right: 20, bottom: 40, left: 60},
   width = 600 - margin.left - margin.right,
   height = 600 - margin.top - margin.bottom;
 
-var hardcoded_domain = [1,8]
+// var hardcoded_domain = [1,8]
 
 function getOffset(element) {
   const rect = element.getBoundingClientRect();
@@ -74,8 +74,7 @@ d3.csv("data/matrices/wave1_aa_num_contacts.csv", function(data) {
     
     var colors = d3.scaleSequential()
         .interpolator(d3.interpolateViridis)
-        // .domain([d3.min(data, function(d) {return d.count;}), d3.max(data, function(d) {return d.count;})])
-        .domain(hardcoded_domain)
+        .domain([d3.min(data, function(d) {return d.count;}), d3.max(data, function(d) {return d.count;})])  
 
     var Tooltip = d3.select("div#heatmap")
         .append("div")
@@ -117,6 +116,7 @@ d3.csv("data/matrices/wave1_aa_num_contacts.csv", function(data) {
             .on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave);
+          
 })
 
 // append the svg object to the body of the page
@@ -212,8 +212,7 @@ function updateData() {
 
 	var colors = d3.scaleSequential()
 		.interpolator(d3.interpolateViridis)
-		// .domain([d3.min(data, function(d) {return d.count;}), d3.max(data, function(d) {return d.count;})])
-		.domain(hardcoded_domain)
+		.domain([d3.min(data, function(d) {return d.count;}), d3.max(data, function(d) {return d.count;})])
 
     svg.selectAll(".cell")
         .data(data)
