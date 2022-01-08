@@ -1,6 +1,11 @@
-var margin = {top:10, left:60, bottom:30, right:30},
+function toggleSeason(i) {
+    document.getElementById("radio-"+i).checked = true;
+    updateData();
+  }  
+
+var margin = {top:50, left:60, bottom:30, right:30},
     width = 1000 - margin.left - margin.right,
-    height = 600 - margin.left - margin.right
+    height = 620 - margin.left - margin.right
 
 var svg = d3.select("div#scatterplot")
     .append("svg")
@@ -9,11 +14,10 @@ var svg = d3.select("div#scatterplot")
     .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("data/bruno_changes.csv", function(data) {
+d3.csv("data/bruno_changes.csv").then(function(data) {
+
     filtered_data = data.filter(function(d) {
-        return (d.season === "2021" && d.time > 90);
-        // console.log(document.querySelector('input[name="wave-filter"]:checked').value)
-        // return d.wave === document.querySelector('input[name="wave-filter"]:checked').value
+        return (d.season === "2020" && d.time > 90);
         });
     console.log(filtered_data);
 
@@ -34,32 +38,62 @@ d3.csv("data/bruno_changes.csv", function(data) {
         .call(d3.axisLeft(y));
 
     var datapoints = svg.selectAll(".datapoint")
-        .data(filtered_data)
-        .enter();
+        .data(filtered_data, function(d) {return d.number;});
+
+    var Tooltip = d3.select("div#scatterplot")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip");
     
-    datapoints.append("circle")
+    var mouseover = function(event, d) {
+        Tooltip
+            .style("opacity", 1);
+      }
+    var mousemove = function(event, d) {
+        Tooltip
+            .html(d.player+"<br>Mins: "+d.time+"<br>xG: "+d3.format("0.4")(d.xG)+"<br>xA: "+d3.format("0.4")(d.xA))
+            .style("left", (d3.pointer(event)[0] + 80) + "px")
+            .style("top", (d3.pointer(event)[1] + 30) + "px")
+      }
+    var mouseleave = function(event, d) {
+        Tooltip
+            .style("opacity", 0);
+      }
+
+    
+    
+    datapoints.join("circle")
             .attr("class", "datapoint circle-data")
             .attr("cx", function (d) {return x(d.xGp90);})
             .attr("cy", function (d) {return y(d.xAp90);})
             .attr("r", function (d) {return (d.time/3)**0.5;})
-            // .attr("r", "10px")
             .style("stroke", "black")
             .style("fill",  "rgba(253,185,19, 0.8)")
-    datapoints.append("text")
-            .attr("class", "datapoint, text-data")
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave);
+    
+    datapoints.join("text")
+            .attr("class", "datapoint text-data")
             .attr("x", function (d) {return x(d.xGp90);})
             .attr("y", function (d) {return y(d.xAp90);})
             .attr("text-anchor", "middle")
             .attr("alignment-baseline", "middle")
-            .text(function (d) {return d.number;});
+            .text(function (d) {return d.number;})
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave);
+
 
 })
 
 function updateData() {
-    d3.csv("data/bruno_changes.csv", function(data) {
+    d3.csv("data/bruno_changes.csv").then(function(data) {
+
+        filtered_season = document.querySelector('input[name="season-selector"]:checked').value
 
         filtered_data = data.filter(function(d) {
-            return (d.season === "2020" && d.time > 90);
+            return (d.season === filtered_season && d.time > 90);
             });
         console.log(filtered_data)
 
@@ -79,23 +113,73 @@ function updateData() {
         svg.selectAll(".axis--y")
             .transition(t)
             .call(d3.axisLeft(y));
-    
+
 
         svg.selectAll(".circle-data")
-            .data(filtered_data)
+            .data(filtered_data, function(d) {return d.number})
+            .join(
+                function (enter) {
+                    return enter.append("circle")
+                        .attr("class", "circle-data")
+                        .attr("cx", function (d) {return x(d.xGp90);})
+                        .attr("cy", function (d) {return y(d.xAp90);})
+                        .attr("r", 0)
+                        .style("stroke", "black")
+                        .style("fill",  "rgba(253,185,19, 0.8)");
+                },
+                function (update) {
+                    console.log(update.enter().size(), update.size(), update.exit().size());
+                    return update;
+                },
+                function (exit) {
+                    return exit.transition(t)
+                        .attr("r", 0)
+                        .on('end', function() {
+                            d3.select(this).remove();
+                        });
+                }
+            )
             .transition(t)
             .attr("cx", function (d) {return x(d.xGp90);})
             .attr("cy", function (d) {return y(d.xAp90);})
-            .attr("r", function (d) {return (d.time/3)**0.5;});
+            .attr("r", function (d) {return (d.time/3)**0.5;})
+            .style("stroke", "black")
+            .style("fill",  "rgba(253,185,19, 0.8)");
+
 
         svg.selectAll(".text-data")
-            .data(filtered_data)
+            .data(filtered_data, function(d) {return d.number})
+            .join(
+                function (enter) {
+                    return enter.append("text")
+                        .attr("class", "text-data")
+                        .attr("x", function (d) {return x(d.xGp90);})
+                        .attr("y", function (d) {return y(d.xAp90);})
+                        .text(function (d) {return d.number;})
+                        .attr("text-anchor", "middle")
+                        .attr("alignment-baseline", "middle")
+                        .attr("font-size", 0);
+                },
+                function (update) {
+                    return update;
+                },
+                function(exit) {
+                    return exit.transition(t)
+                        .attr("font-size", "0em")
+                        .on('end', function() {
+                            d3.select(this).remove();
+                        });
+                }
+            )
             .transition(t)
             .attr("x", function (d) {return x(d.xGp90);})
             .attr("y", function (d) {return y(d.xAp90);})
-            .text(function (d) {return d.number;});
-            // .attr("text-anchor", "middle")
-            // .attr("alignment-baseline", "middle")
+            .text(function (d) {return d.number;})
+            .attr("text-anchor", "middle")
+            .attr("alignment-baseline", "middle")
+            .attr("font-size", "1em");
 
     })
 }
+
+updateData()

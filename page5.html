@@ -5,7 +5,7 @@
   <head>
 
     <link rel="icon" type="image/x-icon" href="/img/ralk.png">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="css/default.css" />
     <link rel="stylesheet" href="css/page4.css" />
 
@@ -21,7 +21,16 @@
 
       <h1> Bruno Lage: Improving players? </h1>
 
-      <button onclick= "updateData()"> CLICK HERE </button>
+      <form id="season-selector">
+        <div class="radio-container" onclick="toggleSeason(2020)">
+          <input type="radio" id="radio-2020" name="season-selector" value="2020" checked>
+          <label for="2020"> 2020 </label>  
+        </div>
+        <div class="radio-container" onclick="toggleSeason(2021)">
+          <input type="radio" id="radio-2021" name="season-selector" value="2021">
+          <label for="2021"> 2021 </label>
+        </div>
+      </form>
 
     </section>
 
@@ -30,6 +39,19 @@
       <div id="scatterplot"></div>
 
       <script src="js/page5.js"></script>
+    </section>
+
+    <section class="todo">
+      TODO:
+      <ul>
+        <li> Keep all the necessary code in updateData() (including axes, tooltips) and run it once</li>
+        <li> Add tooltips for newly added elements (should work with the above point?) </li>
+        <li> Possibly customize player divs? Image, style, etc </li>
+        <li> Add some text, and swap plots on scroll </li>
+        <li> Add in positions from understat? Should be simple enough, and will be able to highlight (say, defenders) to see changes </li>
+        <li> Keep axes scales constant, in order to show absolute changes (maybe another plot?) </li>
+        <li> Label axes </li>
+      </ul>
     </section>
 
   </body>
