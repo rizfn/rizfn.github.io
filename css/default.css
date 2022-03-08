@@ -11,7 +11,8 @@ body {
 
 .pushright {
     color: rgba(169, 255, 234, 0.7);
-    padding-left: 500px;
+    display: flex;
+    justify-content: center;
 }
 
 .spaced-list li {
