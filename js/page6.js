@@ -13,7 +13,9 @@ var svg = d3.select("div#forceDirectedGraph")
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
     .force("charge", d3.forceManyBody().strength(-150))
-    .force("center", d3.forceCenter(width / 2, height / 2));
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    // .alphaDecay(0.00228);
+    .alphaDecay(0);
 
 d3.json("data/skytest.json").then(function(graph) {
 
@@ -24,8 +26,7 @@ d3.json("data/skytest.json").then(function(graph) {
     .selectAll("line")
     .data(graph.edges)
     .enter().append("line")
-      .attr("stroke-width", function(d) { return (d.count**0.5)*0.1; })
-      .attr("stroke", "#CC8888");
+      .attr("stroke-width", function(d) { return (d.count**0.5)*0.1; });
 
   var node = svg.append("g")
       .attr("class", "nodes")
@@ -33,7 +34,6 @@ d3.json("data/skytest.json").then(function(graph) {
     .data(graph.nodes)
     .enter().append("circle")
       .attr("r", function(d) {return (d.rows*0.2)**0.5;})
-      .attr("fill", "#CCCCCC")
       .call(d3.drag()
           .on("start", dragstarted)
           .on("drag", dragged)
@@ -42,15 +42,24 @@ d3.json("data/skytest.json").then(function(graph) {
   node.append("title")
       .text(function(d) { return d.id; });
 
+  var nodelabel = svg.append("g")
+        .attr("class", "nodelabels")
+      .selectAll("text")
+      .data(graph.nodes)
+      .enter().append("text")
+      .text(function (d) {return d.id;})
+      .call(d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended));
+        
   simulation
       .nodes(graph.nodes)
       .on("tick", ticked);
 
   simulation.force("link")
-      .links(graph.edges);
-
-  simulation.force("link")
-      .strength(function(d) {console.log(d); return (d.count**0.5)*0.001;});
+      .links(graph.edges)
+      .strength(function(d) {return (d.count**0.5)*0.001;});
 
   function ticked() {
     link
@@ -62,6 +71,10 @@ d3.json("data/skytest.json").then(function(graph) {
     node
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; });
+
+    nodelabel
+        .attr("x", function(d) {return d.x})
+        .attr("y", function(d) {return d.y});
   }
 });
 

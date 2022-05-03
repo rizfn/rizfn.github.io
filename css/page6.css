@@ -1,0 +1,15 @@
+.edges line {
+    stroke: #CC8888;
+}
+
+.nodes circle {
+    fill: #CCCCCC;
+    cursor: pointer;
+}
+
+.nodelabels text {
+    text-anchor: middle;
+    alignment-baseline: middle;
+    fill: #60a8a8;
+    cursor: pointer;
+}
