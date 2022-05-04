@@ -7,7 +7,11 @@ var svg = d3.select("div#forceDirectedGraph")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-    .append("g")
+        .call(d3.zoom()
+          .extent([[0, 0], [width*4, height*4]])
+          .scaleExtent([0.3, 2])
+          .on("zoom", zoomed))
+        .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var simulation = d3.forceSimulation()
@@ -93,4 +97,8 @@ function dragended(event, d) {
   if (!event.active) simulation.alphaTarget(0);
   d.fx = null;
   d.fy = null;
+}
+
+function zoomed({transform}) {
+  svg.attr("transform", transform);
 }
