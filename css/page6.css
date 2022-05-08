@@ -13,3 +13,7 @@
     fill: #60a8a8;
     cursor: pointer;
 }
+
+hr {
+    border-color:#60a8a8;
+}
