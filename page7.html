@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/img/ralk.png">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/page7.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/default.css" />
+    <link rel="stylesheet" href="css/page7.css">
+    <title>Audio Visualizer</title>
+</head>
+
+<body>
+
+    <div class="flex">
+
+        <div id="playmusic">
+            <div class="container">
+            <img id="ollie" src="img/ollie_static.png">
+            <button class="roundbtn center" id="playbutton" onclick="toggleState()"> 
+                <i class="material-icons">play_arrow</i>
+            </button>  
+            </div>
+    
+            <audio id="amberamour" loop>
+            <source src="audio/amberamour.ogg">
+            </audio>  
+            
+            <p> Warning: plays audio (no volume control) </p>
+        </div>
+    
+        <div id="visualizer">
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
