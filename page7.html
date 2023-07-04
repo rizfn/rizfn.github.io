@@ -15,22 +15,35 @@
 
 <body>
 
-    <div class="flex">
+    <div class="flexrow">
 
-        <div id="playmusic">
-            <div class="container">
-            <img id="ollie" src="img/ollie_static.png">
-            <button class="roundbtn center" id="playbutton" onclick="toggleState()"> 
-                <i class="material-icons">play_arrow</i>
-            </button>  
+        <div class="flexcol" id="leftpanel">
+            <div id="playmusic">
+                <div class="container">
+                <img id="ollie" src="img/ollie_static.png">
+                <button class="roundbtn center" id="playbutton" onclick="togglePlayState()"> 
+                    <i class="material-icons">play_arrow</i>
+                </button>  
+                </div>
+        
+                <audio id="amberamour" loop>
+                <source src="audio/amberamour.ogg">
+                </audio>  
+                
+                <p> Plays audio! (no volume control) </p>
             </div>
-    
-            <audio id="amberamour" loop>
-            <source src="audio/amberamour.ogg">
-            </audio>  
-            
-            <p> Warning: plays audio (no volume control) </p>
+
+            <div id="usemicrophone">
+                <div class="container">
+                <img src="img/tio_static.png" id="tio">
+                <button class="roundbtn center" id="micbutton" onclick="toggleMicState()"> 
+                    <i class="material-icons">mic</i>
+                </div>
+                <p> Use your own microphone! (replays) </p>
+            </div>
+
         </div>
+
     
         <div id="visualizer">
         </div>
@@ -40,10 +53,11 @@
     <div class="todo">
         TODO:
         <ul>
-          <li> Figure out something about the overlap in frequencies </li>
-          <li> Add a way to use the microphone and look in realtime </li>
-          <li> Add a way to upload your own audio </li>
-          <li> Add a second curve on the visualizer representing amplitude </li>
+            <li> Fix spacing </li>
+            <li> Add volume slider to ollie </li>
+            <li> Figure out something about the overlap in frequencies </li>
+            <li> Add a way to upload your own audio </li>
+            <li> Add a second curve on the visualizer representing amplitude </li>
         </ul>
     </div>
 

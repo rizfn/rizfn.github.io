@@ -1,4 +1,4 @@
-function toggleState() { // on clicking the play button in olivier's pic
+function togglePlayState() { // on clicking the play button in olivier's pic
 
     var btn = document.getElementById("playbutton")
     var aud = document.getElementById("amberamour")
@@ -17,16 +17,58 @@ function toggleState() { // on clicking the play button in olivier's pic
         pic.src="img/ollie_static.png";
     }
   
-  };
+};    
 
+function toggleMicState() { // on clicking the mic button in jonah's pic
+    var btn = document.getElementById("micbutton")
+    var pic = document.getElementById("tio")
+
+    if (btn.innerHTML.trim() == '<i class="material-icons">mic</i>')  // trim removes whitespace
+    {
+        btn.innerHTML = '<i class="material-icons">mic_off</i>';
+        micPromise = connectMicSource(analyser, audioCtx)
+        pic.src="img/tio_channeling.gif";
+    }
+    else
+    {
+        btn.innerHTML = '<i class="material-icons">mic</i>';
+        micPromise.then(micStream => {
+            disconnectMicSource(micStream)
+        })
+        pic.src="img/tio_static.png";
+    }
+}
+
+async function connectMicSource(analyser, audiocontext) {
+    const micStream = await navigator.mediaDevices.getUserMedia({audio: true, video: false});
+    const mediaStream = new MediaStream(micStream.getAudioTracks());
+    var micSrc = audiocontext.createMediaStreamSource(mediaStream);
+    // Bind our analyser to the media element source.
+    micSrc.connect(analyser);
+    micSrc.connect(audiocontext.destination);
+    return micStream;
+}
+
+function disconnectMicSource(micstream) {
+    tracks = micstream.getAudioTracks()
+    tracks.forEach(track => {
+        track.stop()
+    });
+}
+
+
+// amber amour audio src
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var audioElement = document.getElementById('amberamour');
-var audioSrc = audioCtx.createMediaElementSource(audioElement);
+var amberAmourElement = document.getElementById('amberamour');
+var amberAmourSrc = audioCtx.createMediaElementSource(amberAmourElement);
 var analyser = audioCtx.createAnalyser();
 
 // Bind our analyser to the media element source.
-audioSrc.connect(analyser);
-audioSrc.connect(audioCtx.destination);
+// analyser.fftSize = 1024;
+amberAmourSrc.connect(analyser);
+amberAmourSrc.connect(audioCtx.destination);
+
+
 
 var frequencyData = new Uint8Array(analyser.frequencyBinCount);
 
@@ -46,8 +88,8 @@ var x = d3.scaleLinear()
 var x_bandwidth = 2*Math.PI/256
 
 var y = d3.scaleRadial()
-    .range([innerRadius, outerRadius])   // Domain will be define later.
-    .domain([0, 256]); // Domain of Y is from 0 to the max uint8
+    .range([innerRadius, outerRadius])
+    .domain([0, 256]); // Domain of Y is from 0 to the max (uint8)
 
 svg.append('g')
     .attr("transform", "translate(" + svgWidth / 2 + "," + ( svgHeight/2)+ ")")
@@ -59,7 +101,7 @@ svg.append('g')
     .attr("fill", function(d, i) {return "rgb(0, 0, " + i + ")";})
     .attr("d", d3.arc()
             .innerRadius(innerRadius)
-            .outerRadius(function(d) {console.log(d, y(d), x(d));return y(d);})
+            .outerRadius(function(d) {return y(d);})
             .startAngle(function(d, i) {return x(i);})
             .endAngle(function(d, i) {return x(i) + x_bandwidth;})
             .padAngle(0.01)
@@ -71,7 +113,6 @@ function renderChart() {
 
     // Copy frequency data to frequencyData array.
     analyser.getByteFrequencyData(frequencyData);
-    console.log(frequencyData)
 
     // Update d3 chart with new data.
     svg.selectAll('path')
