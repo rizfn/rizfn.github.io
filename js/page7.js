@@ -71,11 +71,13 @@ amberAmourSrc.connect(audioCtx.destination);
 
 
 var frequencyData = new Uint8Array(analyser.frequencyBinCount);
+var amplitudeData = new Uint8Array(analyser.fftSize);
 
 let svgWidth = 800;
 let svgHeight = 800;
 
-let innerRadius = 100;
+let innerRadius = 50;
+let middleRadius = 200;
 let outerRadius = Math.min(svgWidth, svgHeight) / 2;
 
 
@@ -85,46 +87,77 @@ var x = d3.scaleLinear()
     .range([0, 2 * Math.PI])    // X axis goes from 0 to 2pi = all around the circle. If I stop at 1Pi, it will be around a half circle
     .domain([0, 256]); // There is overlap!! but removing it would be too many bars and hard to resolve
 
+var x_line = d3.scaleLinear()
+    .range([0, 2 * Math.PI])
+    .domain([0, analyser.fftSize])
+
 var x_bandwidth = 2*Math.PI/256
 
-var y = d3.scaleRadial()
-    .range([innerRadius, outerRadius])
+var y_freq = d3.scaleRadial()
+    .range([middleRadius, outerRadius])
+    .domain([0, 256]); // Domain of Y is from 0 to the max (uint8)
+
+var y_line = d3.scaleLinear()
+    .range([innerRadius, middleRadius])
     .domain([0, 256]); // Domain of Y is from 0 to the max (uint8)
 
 svg.append('g')
     .attr("transform", "translate(" + svgWidth / 2 + "," + ( svgHeight/2)+ ")")
-    .selectAll('path')
+    .selectAll('.freq')
     .data(frequencyData)
     .enter()
     .append('path')
-    // .attr("fill", "#69b3a2")
+    .attr('class', 'freq')
     .attr("fill", function(d, i) {return "rgb(0, 0, " + i + ")";})
     .attr("d", d3.arc()
-            .innerRadius(innerRadius)
-            .outerRadius(function(d) {return y(d);})
+            .innerRadius(middleRadius)
+            .outerRadius(function(d) {return y_freq(d);})
             .startAngle(function(d, i) {return x(i);})
             .endAngle(function(d, i) {return x(i) + x_bandwidth;})
-            .padAngle(0.01)
-            .padRadius(innerRadius));
+            .padAngle(0.1*x_bandwidth)
+            .padRadius(middleRadius));
+         
 
-        
+svg.append('g')
+    .attr("transform", "translate(" + svgWidth / 2 + "," + ( svgHeight/2)+ ")")
+    .append('path')
+    .datum(amplitudeData)
+    .attr('class', 'amp')
+    .attr('stroke', 'yellow')
+    .attr('stroke-width', 2)
+    .attr('fill', 'none')
+    .attr('d', 'M0 -100 M1 100')
+    .attr('d', d3.lineRadial()
+                    .angle((d, i) => x_line(i))
+                    .radius((d) => y_line(d))
+    );
+            
+
 function renderChart() {
     requestAnimationFrame(renderChart);
 
     // Copy frequency data to frequencyData array.
     analyser.getByteFrequencyData(frequencyData);
+    analyser.getByteTimeDomainData(amplitudeData);
 
     // Update d3 chart with new data.
-    svg.selectAll('path')
-        .attr("fill", function(d, i) {return "rgb(0, 0, " + i + ")";})
+    svg.selectAll('path.freq')
         .data(frequencyData)
         .attr("d", d3.arc()
-            .innerRadius(innerRadius)
-            .outerRadius(function(d) {return y(d);})
+            .innerRadius(middleRadius)
+            .outerRadius(function(d) {return y_freq(d);})
             .startAngle(function(d, i) {return x(i);})
             .endAngle(function(d, i) {return x(i) + x_bandwidth;})
-            .padAngle(0.01)
-            .padRadius(innerRadius));
+            .padAngle(0.1*x_bandwidth)
+            .padRadius(middleRadius)
+            );
+
+    svg.selectAll('path.amp')
+        .datum(amplitudeData)
+        .attr('d', d3.lineRadial()
+                        .angle((d, i) => x_line(i))
+                        .radius((d) => y_line(d))
+        );
 }
 
 // Run the loop
@@ -135,6 +168,7 @@ renderChart();
 document.querySelector('button').addEventListener('click', function() {
     if (audioCtx.state === 'suspended') {
     audioCtx.resume()
+    console.log('Playback resumed successfully')
     }
   });
   
