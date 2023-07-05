@@ -64,7 +64,7 @@ var amberAmourSrc = audioCtx.createMediaElementSource(amberAmourElement);
 var analyser = audioCtx.createAnalyser();
 
 // Bind our analyser to the media element source.
-// analyser.fftSize = 1024;
+analyser.fftSize = 1024;
 amberAmourSrc.connect(analyser);
 amberAmourSrc.connect(audioCtx.destination);
 
@@ -129,4 +129,13 @@ function renderChart() {
 
 // Run the loop
 renderChart();
+
+
+// Resume playback when user interacted with the page.
+document.querySelector('button').addEventListener('click', function() {
+    if (audioCtx.state === 'suspended') {
+    audioCtx.resume()
+    }
+  });
+  
 
