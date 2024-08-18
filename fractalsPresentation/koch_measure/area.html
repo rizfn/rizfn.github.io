@@ -7,18 +7,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../common.css">
     <link rel="icon" href="../fig/koch_favicon.png" type="image/x-icon">
-    <title>Koch Curve: Measuring Length</title>
-    <script src="length.js" defer></script>
+    <title>Koch Curve: Measuring Area</title>
+    <script src="area.js" defer></script>
 </head>
 
 <body>
     <canvas id="canvas"></canvas>
     <div class="overlay overlay-text">
-        Length of each segment: <span id="segmentLength">1</span>
+        Area of each triangle: <span id="segmentArea">0.1443</span>
         <br>
-        Number of segments: <span id="segmentN">1</span>
+        Number of triangles: <span id="segmentN">1</span>
         <br>
-        Total Length: <span id="totalLength">1</span>
+        Total Area: <span id="totalArea">0.1443</span>
     </div>
     <svg class="overlay overlay-graph"></svg>
 </body>

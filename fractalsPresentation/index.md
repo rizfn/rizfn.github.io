@@ -64,6 +64,23 @@ Background
 
 ---
 
+## Construction
+
+<iframe width="auto" height="1000px" src="https://rizfn.github.io/fractalsPresentation/koch_construction/" style="border: 1px solid #cccccc" frameborder=0>
+</iframe>
+
+---
+
+<iframe width="auto" height="1000px" src="https://rizfn.github.io/fractalsPresentation/koch_measure/length.html" style="border: 1px solid #cccccc" frameborder=0>
+</iframe>
+
+---
+
+<iframe width="auto" height="1000px" src="https://rizfn.github.io/fractalsPresentation/koch_measure/area.html" style="border: 1px solid #cccccc" frameborder=0>
+</iframe>
+
+---
+
 ## Fractals in biophysics
 
 ---

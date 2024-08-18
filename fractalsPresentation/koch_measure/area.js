@@ -26,11 +26,11 @@ function resizeCanvasToDisplaySize(canvas) {
 }
 
 // Function to set initial line coordinates
-function setInitialCoordinates(offsetY = 0) {
+function setInitialCoordinates() {
     const startX = canvas.clientWidth / 5;
     const endX = canvas.clientWidth * 4 / 5;
-    const startY = canvas.clientHeight / 2 + offsetY;
-    const endY = canvas.clientHeight / 2 + offsetY;
+    const startY = canvas.clientHeight / 2;
+    const endY = canvas.clientHeight / 2;
     return [
         [startX, startY],
         [endX, endY]
@@ -38,12 +38,11 @@ function setInitialCoordinates(offsetY = 0) {
 }
 
 // Function to draw a line
-function drawLine(x1, y1, x2, y2, color = 'black', lineWidth = 1) {
+function drawLine(x1, y1, x2, y2) {
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
-    ctx.lineWidth = lineWidth / scale; // Adjust line width based on scale
-    ctx.strokeStyle = color; // Set the line color
+    ctx.lineWidth = 1 / scale; // Adjust line width based on scale
     ctx.stroke();
 }
 
@@ -74,22 +73,44 @@ function generateKochNextIteration(points) {
 }
 
 // Function to draw the Koch curve
-function drawKochCurve(points, color = 'black', lineWidth = 1) {
+function drawKochCurve(points) {
     for (let i = 0; i < points.length - 1; i++) {
         const [x1, y1] = points[i];
         const [x2, y2] = points[i + 1];
-        drawLine(x1, y1, x2, y2, color, lineWidth);
+        drawLine(x1, y1, x2, y2);
+    }
+}
+
+// Function to draw a filled triangle
+function drawTriangle(x1, y1, x2, y2, x3, y3) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.lineTo(x3, y3);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'; // Transparent red
+    ctx.fill();
+}
+
+// Function to draw the red triangles representing the area approximation
+function drawRedTriangles(points) {
+    for (let i = 0; i < points.length; i += 3) {
+        const [x1, y1] = points[i];
+        const [x2, y2] = points[i + 1];
+        const [x3, y3] = points[i + 2];
+
+        drawTriangle(x1, y1, x2, y2, x3, y3);
     }
 }
 
 // Initial points for the Koch curve
 let points = setInitialCoordinates();
-let redPoints = setInitialCoordinates(2);
 
 // Generate 7 iterations of the Koch curve
 for (let i = 0; i < kochMaxIteration; i++) {
     points = generateKochNextIteration(points);
 }
+let redPoints = calculateRedPoints(points, 0);
 
 // Draw the final Koch curve
 function initializeCanvas() {
@@ -101,7 +122,7 @@ function initializeCanvas() {
     ctx.translate(panX, panY); // Apply panning
     ctx.scale(scale, scale); // Apply the current scale
     drawKochCurve(points); // Draw the black Koch curve
-    drawKochCurve(redPoints, 'red', 2); // Draw the red Koch curve
+    drawRedTriangles(redPoints); // Draw the red triangles
     ctx.restore();
 }
 
@@ -150,27 +171,43 @@ canvas.addEventListener('mouseout', () => {
     initializeCanvas();
 });
 
-segmentLength = d3.select("#segmentLength");
+segmentArea = d3.select("#segmentArea");
 segmentN = d3.select("#segmentN");
-totalLength = d3.select("#totalLength");
+totalArea = d3.select("#totalArea");
 
-// Event listener for spacebar key press
 document.addEventListener('keydown', (event) => {
     if (event.code === 'Space') {
-        if (redIteration < kochMaxIteration) {
-            redPoints = generateKochNextIteration(redPoints);
+        if (redIteration < kochMaxIteration - 1) {
             redIteration++;
+            redPoints = calculateRedPoints(points, redIteration);
         } else {
-            redPoints = setInitialCoordinates(2);
             redIteration = 0;
+            redPoints = calculateRedPoints(points, 0);
         }
         initializeCanvas();
         updateGraph();
-        segmentLength.text(d3.format(".2E")(Math.pow(1 / 3, redIteration)));
+        segmentArea.text(d3.format(".3e")(Math.sqrt(3)/12) * Math.pow(1 / 9, redIteration));
         segmentN.text(d3.format(".2d")(Math.pow(4, redIteration)));
-        totalLength.text(d3.format(".3f")(Math.pow(4 / 3, redIteration)));
+        totalArea.text(d3.format(".3e")(Math.sqrt(3)/12) * Math.pow(4 / 9, redIteration));
     }
 });
+
+function calculateRedPoints(points, iteration) {
+
+    const numTriangles = Math.pow(4, iteration);
+    const segmentLength = Math.floor(points.length / numTriangles);
+    const redPoints = [];
+
+    for (let i = 0; i < numTriangles; i++) {
+        const segmentStart = i * segmentLength;
+        const segmentEnd = i == 0 ? (i + 1) * segmentLength - 1 : (i + 1) * segmentLength;
+        const segmentMid = Math.floor((segmentStart + segmentEnd) / 2);
+
+        redPoints.push(points[segmentStart], points[segmentMid], points[segmentEnd]);
+    }
+
+    return redPoints;
+}
 
 // Select the SVG element
 const svg = d3.select("svg");
@@ -187,13 +224,13 @@ const height = svgHeight - margin.top - margin.bottom;
 const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
 // Set up the scales for the graph
-const x = d3.scaleLinear().domain([0, kochMaxIteration + 1]).range([0, width]);
-const y = d3.scaleLinear().domain([0, Math.pow(4 / 3, kochMaxIteration)]).range([height, 0]);
+const x = d3.scaleLinear().domain([0, kochMaxIteration]).range([0, width]);
+const y = d3.scaleLinear().domain([0, Math.sqrt(3)/12]).range([height, 0]);
 
 // Add the x-axis to the graph
 g.append("g")
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(kochMaxIteration + 1).tickFormat(d3.format("d")));
+    .call(d3.axisBottom(x).ticks(kochMaxIteration).tickFormat(d3.format("d")));
 
 // Add the y-axis to the graph
 g.append("g")
@@ -213,7 +250,7 @@ g.append("text")
     .attr("y", -margin.left / 1.5)
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Length");
+    .text("Area");
 
 // initial draw
 updateGraph();
@@ -222,7 +259,7 @@ updateGraph();
 function updateGraph() {
     let graphData = [];
     for (let i = 0; i <= redIteration; i++) {
-        graphData.push({ iteration: i + 1, length: Math.pow(4 / 3, i) });
+        graphData.push({ iteration: i + 1, area: (Math.sqrt(3)/12) * Math.pow(4 / 9, i) });
     }
     // Bind the data to the circles
     const circles = g.selectAll("circle").data(graphData);
@@ -230,16 +267,15 @@ function updateGraph() {
     // Enter new circles
     circles.enter().append("circle")
         .attr("cx", d => x(d.iteration))
-        .attr("cy", d => y(d.length))
+        .attr("cy", d => y(d.area))
         .attr("r", 5)
         .style("fill", "red");
 
     // Update existing circles
     circles
         .attr("cx", d => x(d.iteration))
-        .attr("cy", d => y(d.length));
+        .attr("cy", d => y(d.area));
 
     // Remove old circles
     circles.exit().remove();
 }
-
