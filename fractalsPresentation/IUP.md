@@ -4,7 +4,6 @@ theme: uncover
 math: mathjax
 paginate: true
 _paginate: skip
-backgroundImage: url('fig/KU5.png')
 backgroundSize: contain
 style: |
         .columns {
