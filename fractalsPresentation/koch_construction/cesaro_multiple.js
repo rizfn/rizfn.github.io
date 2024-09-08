@@ -9,8 +9,10 @@ let panY = 0; // Initial pan offset Y
 let isPanning = false; // Flag to track panning state
 let startX, startY; // Starting coordinates for panning
 
-const maxIteration = 8; // Maximum iteration count
+const maxIteration = 7; // Maximum iteration count
 let iteration = 0; // Initial iteration count
+
+const angles = [85, 70, 89, 80]; // Angles for each quadrant
 
 // Function to resize the canvas to match its display size
 function resizeCanvasToDisplaySize(canvas) {
@@ -26,15 +28,19 @@ function resizeCanvasToDisplaySize(canvas) {
     return needResize;
 }
 
-// Function to set initial line coordinates
 function setInitialCoordinates() {
-    const startX = canvas.clientWidth / 5;
-    const endX = canvas.clientWidth * 4 / 5;
-    const startY = canvas.clientHeight / 2;
-    const endY = canvas.clientHeight / 2;
+    const midX = canvas.clientWidth / 4;
+    const midY = canvas.clientHeight / 2;
+    const quarterWidth = canvas.clientWidth / 4;
+    const quarterHeight = canvas.clientHeight / 4;
+    const horizontalSpacing = 10; // Add a little horizontal space between columns
+    const verticalSpacing = 5; // Add a little vertical space between rows
+
     return [
-        [startX, startY],
-        [endX, endY]
+        [[midX - quarterWidth - horizontalSpacing, midY - quarterHeight - verticalSpacing], [midX + quarterWidth - horizontalSpacing, midY - quarterHeight - verticalSpacing]], // Top-left
+        [[midX - quarterWidth - horizontalSpacing, midY + quarterHeight + verticalSpacing], [midX + quarterWidth - horizontalSpacing, midY + quarterHeight + verticalSpacing]], // Bottom-left
+        [[midX + quarterWidth + horizontalSpacing, midY - quarterHeight - verticalSpacing], [midX + 3 * quarterWidth + horizontalSpacing, midY - quarterHeight - verticalSpacing]], // Top-right
+        [[midX + quarterWidth + horizontalSpacing, midY + quarterHeight + verticalSpacing], [midX + 3 * quarterWidth + horizontalSpacing, midY + quarterHeight + verticalSpacing]]  // Bottom-right
     ];
 }
 
@@ -79,36 +85,52 @@ function generateNextIteration(points, angle) {
 
 // Function to draw the Cesàro curve
 function drawCesaroCurve(points) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(panX, panY); // Apply panning
-    ctx.scale(scale, scale); // Apply the current scale
-    ctx.scale(1, -1); // Invert the y-axis
-    ctx.translate(0, -canvas.height/1.2);
     for (let i = 0; i < points.length - 1; i++) {
         const [x1, y1] = points[i];
         const [x2, y2] = points[i + 1];
         drawLine(x1, y1, x2, y2);
     }
-    ctx.restore();
 }
 
-// Initial points for the Cesàro curve
-let points = setInitialCoordinates();
+// Initial points for the Cesàro curves
+let initialPoints = setInitialCoordinates();
+let pointsArray = initialPoints.map((points, index) => ({
+    points,
+    angle: angles[index]
+}));
 
 // Event listener for spacebar key press
 document.addEventListener('keydown', (event) => {
     if (event.code === 'Space') {
         if (iteration < maxIteration) {
-            points = generateNextIteration(points, 90); // Set the desired angle here
+            pointsArray = pointsArray.map(({ points, angle }) => ({
+                points: generateNextIteration(points, angle),
+                angle
+            }));
             iteration++;
         } else {
-            points = setInitialCoordinates();
+            initialPoints = setInitialCoordinates();
+            pointsArray = initialPoints.map((points, index) => ({
+                points,
+                angle: angles[index]
+            }));
             iteration = 0;
         }
-        drawCesaroCurve(points);
+        drawAllCesaroCurves();
     }
 });
+
+// Function to draw all Cesàro curves
+function drawAllCesaroCurves() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(panX, panY); // Apply panning
+    ctx.scale(scale, scale); // Apply the current scale
+    ctx.scale(1, -1); // Invert the y-axis
+    ctx.translate(0, -canvas.height/1.25); // Translate to adjust the drawing area
+    pointsArray.forEach(({ points }) => drawCesaroCurve(points));
+    ctx.restore();
+}
 
 // Event listener for mouse wheel to handle zooming
 canvas.addEventListener('wheel', (event) => {
@@ -123,7 +145,7 @@ canvas.addEventListener('wheel', (event) => {
     panY = mouseY - (mouseY - panY) * (newScale / scale);
 
     scale = newScale;
-    drawCesaroCurve(points);
+    drawAllCesaroCurves();
 });
 
 // Event listeners for panning
@@ -137,7 +159,7 @@ canvas.addEventListener('mousemove', (event) => {
     if (isPanning) {
         panX = event.clientX - startX;
         panY = event.clientY - startY;
-        drawCesaroCurve(points);
+        drawAllCesaroCurves();
     }
 });
 
@@ -152,10 +174,22 @@ canvas.addEventListener('mouseout', () => {
 // Initial canvas setup and drawing
 function initializeCanvas() {
     if (resizeCanvasToDisplaySize(canvas)) {
-        points = setInitialCoordinates();
-        drawCesaroCurve(points);
+        initialPoints = setInitialCoordinates();
+        pointsArray = initialPoints.map((points, index) => ({
+            points,
+            angle: angles[index]
+        }));
+        drawAllCesaroCurves();
     }
 }
 
+function adjustCanvasSizeAndPosition() {
+    canvas.style.width = '90%'; // Adjust the width to fit better on the screen
+    canvas.style.height = '95%'; // Adjust the height to fit better on the screen
+    canvas.style.margin = 'auto'; // Center the canvas horizontally
+    canvas.style.display = 'block'; // Ensure the canvas is displayed as a block element
+}
+
+adjustCanvasSizeAndPosition();
 initializeCanvas();
 window.addEventListener('resize', initializeCanvas);
