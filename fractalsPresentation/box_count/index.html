@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Box Counting with D3.js</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5%;
+        }
+        #canvas-container {
+            position: relative;
+        }
+        #canvas {
+            border: 1px solid black;
+        }
+        #box-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #slider-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <canvas id="canvas" width="512" height="512"></canvas>
+        <svg id="box-container" width="512" height="512"></svg>
+    </div>
+    <div id="slider-container">
+        <input type="range" id="box-slider" min="0" max="10" value="0">
+    </div>
+    <div>
+        <div id="regression-plot"></div>
+        <div id="regression-equation"></div>
+    </div>
+    <script src="box_count.js"></script>
+</body>
+</html>
