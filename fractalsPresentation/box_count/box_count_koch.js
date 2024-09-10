@@ -3,7 +3,7 @@ function box_count(canvas) {
     let im_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
     let cnts = [];
-    for (let s = 1; s <= Math.min(canvas.width, canvas.height); s = 2 * s) {
+    for (let s = Math.min(canvas.width, canvas.height); s >= 1; s = Math.floor(s / 2)) {
         let boxes = [];
         let cnt = 0;
         for (let i = 0; s * (i + 1) <= canvas.height; i++) {
@@ -51,10 +51,10 @@ function drawBoxes(canvas, cnts, n) {
             .data(boxes)
             .enter()
             .append("rect")
-            .attr("x", d => (s * d[1] * w) / canvas.width)
-            .attr("y", d => (s * d[0] * h) / canvas.height)
-            .attr("width", (s * w) / canvas.width)
-            .attr("height", (s * h) / canvas.height)
+            .attr("x", d => (d[1] * s / w) * 100 + "%")
+            .attr("y", d => (d[0] * s / h) * 100 + "%")
+            .attr("width", (s / w) * 100 + "%")
+            .attr("height", (s / h) * 100 + "%")
             .attr("opacity", 0.2)
             .attr("stroke", "white")
             .attr("stroke-width", 1);
@@ -147,6 +147,8 @@ img.src = '../fig/IUP/koch.png'; // Replace with your image URL
 img.onload = function () {
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight;
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
     let cnts = box_count(canvas);

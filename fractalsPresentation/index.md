@@ -87,9 +87,6 @@ $ab \gt 1 + \frac32\pi$
 
 ![width:1150px](fig/weierstrass_reviews.png)
 
----
-
-Cantor (?)
 
 ---
 
@@ -159,6 +156,14 @@ More *intuitive* version of Weierstrass's result, through **geometry**
 
 ---
 
+**Infinite** length?! Infinite mass, like Carl's Mother??
+
+Not quite!
+
+![](fig/IUP/pin_head_curve.png)
+
+---
+
 <iframe width="auto" height="1000px" src="https://rizfn.github.io/fractalsPresentation/koch_measure/area.html" style="border: 1px solid #cccccc" frameborder=0>
 </iframe>
 
@@ -175,6 +180,13 @@ $\\$
 $\\$
 
 We need a **new way** to measure!
+
+
+---
+
+$L\to s\cdot L \qquad\implies \qquad M\to s^d \cdot M$
+
+![width:900px](fig/deconstructing_cube.png)
 
 ---
 
@@ -225,21 +237,10 @@ Simple instructions!
 
 ---
 
-## Fractals in biophysics
-
-![height:500px](fig/david_johnson_dendrites_1.png) ![height:500px](fig/david_johnson_dendrites_2.png)
-
----
-
-### It's just pushing!
-
-![height:500px](fig/dp_pushing.png) ![height:500px](fig/david_johnson_dendrites_3.png)
-
----
-
 ![bg](fig/Marpat1.jpg)
 
 ![bg fit](fig/MARPAT_patent.png)
+
 
 ---
 
@@ -259,7 +260,7 @@ Simple rules, giving complex behaviour.
 
 ### Bureaucracy
 
-
+![width:800px](fig/beurocrats_sneppen_image.png)
 
 
 ---
@@ -274,6 +275,26 @@ Number of *times* a site topples
 ---
 
 ![bg height:90%](fig/SOC_hiddenfractals.png)
+
+---
+
+### Chaos
+
+<iframe width="auto" height="1000px" src="https://rizfn.github.io/fractalsPresentation/chaotic_attractor/" style="border: 1px solid #cccccc" frameborder=0>
+</iframe>
+
+---
+
+## Fractals in biophysics
+
+![height:500px](fig/david_johnson_dendrites_1.png) ![height:500px](fig/david_johnson_dendrites_2.png)
+
+---
+
+### It's just pushing!
+
+![height:500px](fig/dp_pushing.png) ![height:500px](fig/david_johnson_dendrites_3.png)
+
 
 ---
 

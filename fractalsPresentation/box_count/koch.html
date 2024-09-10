@@ -9,14 +9,18 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            gap: 2%;
+            height: 100vh;
+            margin: 0;
         }
         #canvas-container {
             position: relative;
+            width: 70%; /* Allocate more horizontal space */
+            height: 100%;
         }
-        #canvas {
-            border: 1px solid black;
-        }
-        #box-container {
+        #canvas, #box-container {
+            width: 100%;
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
@@ -24,12 +28,16 @@
         #slider-container {
             margin-top: 20px;
         }
+        #regression-plot {
+            width: 100%;
+            height: 50%;
+        }
     </style>
 </head>
 <body>
     <div id="canvas-container">
-        <canvas id="canvas" width="1024" height="512"></canvas>
-        <svg id="box-container" width="1024" height="512"></svg>
+        <canvas id="canvas"></canvas>
+        <svg id="box-container"></svg>
     </div>
     <div id="slider-container">
         <input type="range" id="box-slider" min="0" max="10" value="0">
