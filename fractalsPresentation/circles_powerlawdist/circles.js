@@ -1,10 +1,10 @@
 // Set up the SVG dimensions and margins
 const width = window.innerWidth / 2;
 const height = window.innerHeight;
-const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+const margin = { top: 0, right: 0, bottom: 0, left: 0 };
 
 // Number of circles
-const N_circles = 300;
+const N_circles = 10000;
 
 // Create SVG containers
 const svgUniform = d3.select("#uniform_circles")
@@ -49,7 +49,7 @@ function generateCircles(distribution) {
 
 // Uniform distribution
 function uniformDistribution() {
-    return Math.random() * 10 + 1;
+    return Math.random() * 5 + 5;
 }
 
 // Power law distribution
