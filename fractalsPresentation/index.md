@@ -156,7 +156,7 @@ More *intuitive* version of Weierstrass's result, through **geometry**
 
 ---
 
-**Infinite** length?! Infinite mass, like Carl's Mother??
+**Infinite length?!** Infinite mass, like Carl's Mother??
 
 Not quite!
 
@@ -187,6 +187,10 @@ We need a **new way** to measure!
 $L\to s\cdot L \qquad\implies \qquad M\to s^d \cdot M$
 
 ![width:900px](fig/deconstructing_cube.png)
+
+---
+
+![bg width:75%](fig/IUP/koch.png)
 
 ---
 
